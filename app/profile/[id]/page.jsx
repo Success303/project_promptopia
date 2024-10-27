@@ -2,13 +2,13 @@
 
 import Profile from "@components/Profile";
 
-import { useState, useEffect } from "react";
+import { use, useState, useEffect, useId } from "react";
 import { useSearchParams } from "next/navigation";
 
 const UserProfile = ({ params }) => {
   const searchParams = useSearchParams();
-  const username = searchParams.get("username");
-  const userId = searchParams.get("id").toString();
+  const userName = searchParams.get("name");
+  const userId = use(params).id;
 
   const [userPosts, setUserPosts] = useState([]);
 
@@ -20,13 +20,13 @@ const UserProfile = ({ params }) => {
       setUserPosts(data);
     };
 
-    fetchUserPosts();
-  }, []);
+    if (userId) fetchUserPosts();
+  }, [userId]);
 
   return (
     <Profile
-      name={username}
-      desc={`Welcome to ${username}'s personalized profile page. Explore ${username}'s exceptional prompts and be inspired by the power of their imagination`}
+      name={userName}
+      desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
       data={userPosts}
     />
   );
