@@ -5,7 +5,7 @@ import Profile from "@components/Profile";
 import { use, useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-const UserProfile = ({ params }) => {
+const UserProfileComponent = ({ params }) => {
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
   const userId = use(params).id;
@@ -33,5 +33,11 @@ const UserProfile = ({ params }) => {
     </Suspense>
   );
 };
+
+const UserProfile = ({ params }) => (
+  <Suspense>
+    <UserProfileComponent params={params} />
+  </Suspense>
+);
 
 export default UserProfile;
