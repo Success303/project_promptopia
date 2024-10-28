@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
-const EditPromptComponent = () => {
+const EditPrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
@@ -62,11 +62,5 @@ const EditPromptComponent = () => {
     />
   );
 };
-
-const EditPrompt = () => (
-  <Suspense>
-    <EditPromptComponent />
-  </Suspense>
-);
 
 export default EditPrompt;
